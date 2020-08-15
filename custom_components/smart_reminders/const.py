@@ -1,0 +1,1 @@
+DOMAIN = "smart_reminders"

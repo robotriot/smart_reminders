@@ -1,0 +1,9 @@
+{
+  "codeowners": ["@robotriot"],
+  "config_flow": true,
+  "dependencies": [],
+  "documentation": "https://github.com/robotriot/smart_reminders",
+  "domain": "smart_reminders",
+  "name": "Smart Reminders",
+  "requirements": []
+}

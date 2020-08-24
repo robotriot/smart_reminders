@@ -5,5 +5,5 @@
   "documentation": "https://github.com/robotriot/smart_reminders",
   "domain": "smart_reminders",
   "name": "Smart Reminders",
-  "requirements": []
+  "requirements": ["psycopg2"]
 }

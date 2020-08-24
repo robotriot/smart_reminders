@@ -1,20 +1,15 @@
-import psycopg2
+from datetime import datetime, timedelta
 import logging
-import traceback
 import re
+import traceback
 
-from .const import DOMAIN
-from datetime import timedelta, datetime
-
-from homeassistant.const import (
-    CONF_USERNAME,
-    CONF_PASSWORD,
-    CONF_PORT,
-    CONF_HOST
-)
+from homeassistant.const import CONF_HOST, CONF_PASSWORD, CONF_PORT, CONF_USERNAME
 from homeassistant.helpers.entity import Entity
 from homeassistant.helpers.entity_component import EntityComponent
 from homeassistant.util import Throttle
+import psycopg2
+
+from .const import DOMAIN
 
 _LOGGER = logging.getLogger(__name__)
 
@@ -140,7 +135,7 @@ class SmartReminderItem(Entity):
         overdue = _overdue
         if now >= self._due and not _overdue:
             overdue = True
-            message = "{}, I'm reminding you to {}".format(self._username, self._title)
+            message = f"{self._username}, I'm reminding you to {self._title}"
             self.hass.services.call("tts", "google_translate_say", {
                 'entity_id': 'all',
                 'message': message
@@ -158,7 +153,7 @@ class SmartReminderItem(Entity):
 
     @ property
     def name(self):
-        return "{}{}".format(CONST_LEADING_ENTITY_NAME, self._id)
+        return f"{CONST_LEADING_ENTITY_NAME}{self._id}"
 
     @ property
     def state_attributes(self):
@@ -170,7 +165,7 @@ class SmartReminderItem(Entity):
             "user": self._username,
             "ignore_count": self._ignore_count,
             "repeatable": self.is_repeatable,
-            "repeats": "Repeats every {}{}".format(self._repeat_number, self._repeat_type),
+            "repeats": f"Repeats every {self._repeat_number}{self._repeat_type}",
         }
 
     @ property
